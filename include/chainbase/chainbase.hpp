@@ -499,6 +499,8 @@ namespace chainbase {
             return {begin, end};
          }
 
+         const auto& stack()const { return _stack; }
+
       private:
          bool enabled()const { return _stack.size(); }
 
@@ -1035,9 +1037,11 @@ namespace chainbase {
 
          bfs::path                                                   _data_dir;
 
+#ifdef CHAINBASE_CHECK_LOCKING
          int32_t                                                     _read_lock_count = 0;
          int32_t                                                     _write_lock_count = 0;
          bool                                                        _enable_require_locking = false;
+#endif
 
          void                                                        _msync_database();
    };
